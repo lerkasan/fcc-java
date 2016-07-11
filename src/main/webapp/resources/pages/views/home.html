@@ -1,3 +1,37 @@
+<head xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:fragment="head"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" sec:fragment="head">
+<div id="logInDiv" align="right" sec:authorize="isAnonymous()">
+    <!--  <form name="logInForm" action="@{/logIn}" method="POST"> -->
+    <form name="logInForm" method="POST" th:action="@{/logIn}" th:object="${user}">
+        <table id="logInTable">
+            <tr>
+                <td><label id="nameLabel" for="nameInput">Username:</label></td>
+                <td>
+                    <input type = "text" id="nameInput" name="name"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label id="passwordLabel" for="passwordInput">Password:</label></td>
+                <td>
+                    <input type = "text" id="passwordInput" name="password"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right">
+                    <!-- <input type = "submit" name="submitButton" value="LogIn">
+                    <button type="submit" name="logInButton" formaction="@{/logIn}">LogIn</button> -->
+                    <button type="submit" name="logInButton" value="logIn">LogIn</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">Haven't account yet?&nbsp;
+                    <button type="submit" name="signInButton" value="signIn">SignIn</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 <div class="container">
     <br/>
     <h5>Home</h5>
