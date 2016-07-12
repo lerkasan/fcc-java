@@ -1,47 +1,43 @@
-<head xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:fragment="head"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" sec:fragment="head">
-<div id="logInDiv" align="right" sec:authorize="isAnonymous()">
-    <!--  <form name="logInForm" action="@{/logIn}" method="POST"> -->
-    <form name="logInForm" method="POST" th:action="@{/logIn}" th:object="${user}">
-        <table id="logInTable">
-            <tr>
-                <td><label id="nameLabel" for="nameInput">Username:</label></td>
-                <td>
-                    <input type = "text" id="nameInput" name="name"/>
-                </td>
-            </tr>
-            <tr>
-                <td><label id="passwordLabel" for="passwordInput">Password:</label></td>
-                <td>
-                    <input type = "text" id="passwordInput" name="password"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="right">
-                    <!-- <input type = "submit" name="submitButton" value="LogIn">
-                    <button type="submit" name="logInButton" formaction="@{/logIn}">LogIn</button> -->
-                    <button type="submit" name="logInButton" value="logIn">LogIn</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">Haven't account yet?&nbsp;
-                    <button type="submit" name="signInButton" value="signIn">SignIn</button>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
-<div class="container">
-    <br/>
-    <h5>Home</h5>
-    <p>Java Tutorial Blog
-        <br/><br/>
-        Java Papers is a Java blog and tutorial website. Java Papers is passionately published by Joe for eight
-        successful years. It has served millions of views and is one of the most popular Java blog in the Java
-        community. Articles and tutorial published are of Java, Android, design patterns, web services, Spring
-        framework, Servlets and JSP technologies.
-        <br/>Java Papers helps to refresh your Java knowledge, keep updated with
-        latest news, prepare for Java interviews and certifications.
-        <br/>Welcome!</p>
-</div>
+<div  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <div id="logInDiv" align="right" sec:authorize="isAnonymous()">
+        <!--  <form name="logInForm" action="@{/logIn}" method="POST" th:object="${user}"> -->
+        <form name="logInForm" method="POST" th:action="@{/logIn}" >
+            <table id="logInTable">
+                <tr>
+                    <td><label id="nameLabel" for="usernameInput">Username:</label></td>
+                    <td>
+                        <input type = "text" id="usernameInput" name="username" th:required="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label id="passwordLabel" for="passwordInput">Password:</label></td>
+                    <td>
+                        <input type = "text" id="passwordInput" name="password" th:required="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        <!-- <input type = "submit" name="submitButton" value="LogIn">
+                        <button type="submit" name="logInButton" formaction="@{/logIn}">LogIn</button> -->
+                        <button type="submit" name="logInButton" value="logIn">LogIn</button>
+                    </td>
+                </tr>
+                </table>
+        </form>
+    Have no account yet?&nbsp; <button type="submit" name="signInButton" value="signIn">SignIn</button>
+    </div>
+    </div>
+    <div class="container">
+        <br/>
+        <h5>Home</h5>
+        <p>Java Tutorial Blog
+            <br/><br/>
+            Java Papers is a Java blog and tutorial website. Java Papers is passionately published by Joe for eight
+            successful years. It has served millions of views and is one of the most popular Java blog in the Java
+            community. Articles and tutorial published are of Java, Android, design patterns, web services, Spring
+            framework, Servlets and JSP technologies.
+            <br/>Java Papers helps to refresh your Java knowledge, keep updated with
+            latest news, prepare for Java interviews and certifications.
+            <br/>Welcome!</p>
+    </div>

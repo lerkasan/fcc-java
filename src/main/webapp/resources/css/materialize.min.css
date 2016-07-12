@@ -2709,7 +2709,7 @@ table {
     hight: 35%;
 }
 
-#passwordInput, #nameInput  {
+#passwordInput, #usernameInput  {
     width: 85%;
     margin: 0 0 0 0;
 }
