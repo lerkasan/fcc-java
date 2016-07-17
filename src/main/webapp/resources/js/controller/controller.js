@@ -7,8 +7,8 @@ myApp.controller('homeController', function ($scope, $http) {
         $scope.emailValidationError = "";
         $scope.passwordValidationError = "";
         $scope.usernameValidationError = "";
-        $scope.validated = true;
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        $scope.valid = true;
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})).$/;
 
         if ($scope.account == null) {
             $scope.account = {};
@@ -16,10 +16,10 @@ myApp.controller('homeController', function ($scope, $http) {
 
         if (re.test($scope.account.email)) {
             $scope.emailValidationError = "Wrong email format.";
-            $scope.validated = false;
+            $scope.valid = false;
         }
 
-        if ($scope.validated) {
+        if ($scope.valid) {
             $scope.submit('http://localhost:8080/#/home', 'Successful login', 'Error occured during login');
         }
 
@@ -35,7 +35,7 @@ myApp.controller('registerController', function ($scope, $http) {
         $scope.emailValidationError = "";
         $scope.passwordValidationError = "";
         $scope.usernameValidationError = "";
-        $scope.validated = true;
+        $scope.valid = true;
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var illegalUsernameChars = /\W/;
 
@@ -58,20 +58,20 @@ myApp.controller('registerController', function ($scope, $http) {
 
         if (re.test($scope.account.email)) {
             $scope.emailValidationError = "Wrong email format.";
-            $scope.validated = false;
+            $scope.valid = false;
         }
 
         if (illegalUsernameChars.test($scope.account.username)) {
             $scope.usernameValidationError = "Please use only letters, numbers and underscopes in username";
-            $scope.validated = false;
+            $scope.valid = false;
         }
 
         if ($scope.account.password != $scope.account.password2) {
             $scope.passwordValidationError = "Passwords aren't equal";
-            $scope.validated = false;
+            $scope.valid = false;
         }
 
-        if ($scope.validated) {
+        if ($scope.valid) {
             $scope.submit('http://localhost:8080/#/register', 'Registration was successful', 'Error occured during registration');
         }
 

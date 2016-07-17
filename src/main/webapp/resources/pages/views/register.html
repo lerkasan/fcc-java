@@ -3,7 +3,7 @@
      {{scope.errorEmail}}
      {{scope.statusCode}}
      <!-- <form name="registerForm" th:method="POST" th:action="@{#/register}" OR ng-submit="validate()"> -->
-     <form name="registerForm" method="POST" ng-submit="validate()"> <!-- th:object="${account}" -->
+     <form name="registerForm" method="POST" ng-submit="validate()" th:object="${account}">
         <table id="registerTable">
             <caption>Please fill in the form below:</caption>
             <tr>
@@ -22,7 +22,7 @@
                 </td>
                 <td>
                     <input type="text" id="nameInput" name="username" class="inputText" ng-model="account.username"
-                           ng-minlength="4" ng-maxlength="15" ng-required="true"/> <!-- th:field="*{username}" -->
+                           ng-minlength="4" ng-maxlength="15" ng-required="true" th:field="*{username}"/>
                 </td>
 
             </tr>
@@ -38,7 +38,7 @@
                 </td>
                 <td>
                     <input type="password" id="passInput" name="password" class="inputText" ng-model="account.password"
-                           ng-minlength="8" ng-required="true"/> <!-- th:field="*{password}" -->
+                           ng-minlength="8" ng-required="true" th:field="*{password}" />
                 </td>
             </tr>
             <tr>
@@ -46,7 +46,7 @@
                     password:<sup>*</sup></label></td>
                 <td>
                     <input type="password" id="passwordInput2" name="password2" class="inputText" ng-model="account.password2"
-                           th:required="true"/>
+                           th:required="true" th:field="*{password2}"/>
 
                 </td>
             </tr>
@@ -61,22 +61,22 @@
                     <div class='wrongInput'>{{emailValidationError}}</div>
                 </td>
                 <td>
-                    <input type="email" id="emailInput" name="email" class="inputText" ng-model="account.email"
-                           ng-required="true"/> <!-- th:field="*{email}" -->
+                    <input type="email" id="emailInput" name="email" class="inputText" ng-model="account.email" th:field="*{email}"
+                           ng-required="true"/>
                 </td>
             </tr>
             <tr>
                 <td><label id="firstNameLabel" class="inputLabel" for="firstNameInput">First name:</label></td>
                 <td>
-                    <input type="text" id="firstNameInput" name="firstName" class="inputText" ng-model="account.firstName"
-                           th:required="false"/> <!-- th:field="*{firstName}" -->
+                    <input type="text" id="firstNameInput" name="firstName" class="inputText" ng-model="account.firstName" th:field="*{firstName}"
+                           th:required="false"/>
                 </td>
             </tr>
             <tr>
                 <td><label id="lastNameLabel" class="inputLabel" for="lastNameInput">Last name:</label></td>
                 <td>
-                    <input type="text" id="lastNameInput" name="lastName" class="inputText" ng-model="account.lastName"
-                           th:required="false"/> <!-- th:field="*{secondName}" -->
+                    <input type="text" id="lastNameInput" name="lastName" class="inputText" ng-model="account.lastName" th:field="*{secondName}"
+                           th:required="false"/>
                 </td>
             </tr>
             <tr>
