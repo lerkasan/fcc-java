@@ -25,6 +25,13 @@ var myApp = angular.module('myApp', ["ngRoute"]).config(function ($routeProvider
             controller: 'infoController'
         });
 
+    // ************  Register Page  ******************
+    $routeProvider.when('/register',
+        {
+            templateUrl: './register.html',
+            controller: 'registerController'
+        });
+
     // ************  Default Page  ******************
     $routeProvider.otherwise({redirectTo: '/home'});
 });
@@ -69,7 +76,6 @@ var myAdmin = angular.module('myAdmin', ["ngRoute"]).config(function ($routeProv
     // ************  Default Page  ******************
     $routeProvider.otherwise({redirectTo: '/home'});
 });
-
 
 
 

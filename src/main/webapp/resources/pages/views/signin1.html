@@ -1,0 +1,73 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <div id="signInDiv" align="right">
+        <ul>
+            <li th:each="err : ${#fields.errors('*')}"
+                th:text="${err}">Input is incorrect
+            </li>
+        </ul>
+    </div>
+    <div ng-app="WebApp" ng-controller="signInController">
+        <table id="signInTable">
+            <th colspan="2">Please fill in the form below:</th>
+            <tr>
+                <td><label id="nameLabel" for="usernameInput"
+                           th:class="${#fields.hasErrors('username')}? 'error'">Username<sup>*</sup>:</label></td>
+                <td>
+                    <input type="text" id="usernameInput" name="username" th:field="*{username}" ng-model="username"
+                           th:class="${#fields.hasErrors('username')}? 'error'" th:required="true"/> &nbsp; {{usernameValidationError}}
+                </td>
+            </tr>
+            <tr>
+                <td><label id="passwordLabel1" for="passwordInput">Password<sup>*</sup>:</label></td>
+                <td>
+                    <input type="text" id="passwordInput" name="password" th:field="*{password}" ng-model="password"
+                           th:class="${#fields.hasErrors('password')}? 'error'" th:required="true"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label id="passwordLabel2" for="passwordInput2">Repeat password:<sup>*</sup></label></td>
+                <td>
+                    <input type="text" id="passwordInput2" name="password2" ng-model="password2" th:required="true"/> &nbsp; {{passwordValidationError}}
+
+                </td>
+            </tr>
+            <tr>
+                <td><label id="emailLabel" for="emailInput"
+                           th:class="${#fields.hasErrors('email')}? 'error'">E-mail<sup>*</sup>:</label></td>
+                <td>
+                    <input type="text" id="emailInput" name="email" th:field="*{email}" ng-model="email"
+                           th:class="${#fields.hasErrors('email')}? 'error'" th:required="true"/> &nbsp; {{emailValidationError}}
+                </td>
+            </tr>
+            <tr>
+                <td><label id="firstNameLabel" for="firstNameInput"
+                           th:class="${#fields.hasErrors('firstName')}? 'error'">First name:</label></td>
+                <td>
+                    <input type="text" id="firstNameInput" name="firstNameInput" th:field="*{firstName}" ng-model="firstName"
+                           th:class="${#fields.hasErrors('firstName')}? 'error'" th:required="false"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label id="lastNameLabel" for="lastNameInput"
+                           th:class="${#fields.hasErrors('lastName')}? 'error'">Last name:</label></td>
+                <td>
+                    <input type="text" id="lastNameInput" name="lastName" th:field="*{lastName}" ng-model="lastName"
+                           th:class="${#fields.hasErrors('lastName')}? 'error'" th:required="false"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right"><i>* - required fields</i></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right">
+                    <!-- <input type = "submit" name="submitButton" value="LogIn">
+                    <button type="submit" name="logInButton" formaction="@{/logIn}">LogIn</button> -->
+                    <button type="submit" name="registerButton" value="register" ng-click="validate()">Register</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</div>
+</div>

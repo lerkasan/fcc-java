@@ -2719,6 +2719,52 @@ table {
     color: black;
 }
 
+.inputText {
+    width: 85%;
+    margin: 0 0 0 0;
+    padding: 0px;
+}
+
+.inputLabel {
+    padding-left: 50px;
+    font-size: 1rem;
+    color: black;
+}
+
+#registerTable {
+    vertical-align: top;
+    table-layout: auto;
+    display: inline-table;
+    width: 50%;
+}
+
+#registerTable td, th {
+    padding: 0px;
+}
+
+#submitButton {
+    align: right;
+}
+
+input:invalid {
+    box-shadow: 0 0 5px 1px red;
+}
+
+input:focus:invalid {
+    outline: none;
+}
+
+.wrongInput {
+    color: red;
+    font-style: italic;
+    padding-left: 50px;
+}
+
+.formErrors {
+    color: red;
+    font-style: italic;
+}
+
 table.bordered > thead > tr, table.bordered > tbody > tr {
     border-bottom: 1px solid #d0d0d0
 }
