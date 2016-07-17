@@ -1,22 +1,16 @@
 package com.web.app.controller;
 
+import com.web.app.exception.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/register")
 public class RegisterController {
 
-   /* @RequestMapping(path = "/", method = { RequestMethod.GET} )
-    public String register_GET() {
-        return "views/register";
-    }
-
-    @RequestMapping(path = "/", method = RequestMethod.POST)
-    public Object register_POST() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-    } */
 }

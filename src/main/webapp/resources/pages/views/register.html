@@ -1,6 +1,9 @@
  <div ng-app="myApp" ng-controller="registerController">
-   <!-- <form name="registerForm" method="POST" th:action="@{/register}" ng-submit="validate()"> -->
-     <form name="registerForm" method="POST" ng-submit="validate()" >
+     {{scope.errorUsername}}
+     {{scope.errorEmail}}
+     {{scope.statusCode}}
+     <!-- <form name="registerForm" th:method="POST" th:action="@{#/register}" OR ng-submit="validate()"> -->
+     <form name="registerForm" method="POST" ng-submit="validate()"> <!-- th:object="${account}" -->
         <table id="registerTable">
             <caption>Please fill in the form below:</caption>
             <tr>
@@ -8,8 +11,7 @@
                                              for="nameInput">Username<sup>*</sup>:</label>&nbsp;
                     <div class="formErrors" ng-messages="registerForm.username.$error"
                          ng-show="registerForm.username.$touched">
-                        <p ng-show="registerForm.username.$error.minlength" class="wrongInput">Username is too
-                            short.</p>
+                        <p ng-show="registerForm.username.$error.minlength" class="wrongInput">Username is too short.</p>
                         <p ng-show="registerForm.username.$error.maxlength" class="wrongInput">Username is too long.</p>
                         <p ng-show="registerForm.username.$error.required" class="wrongInput">Username is empty.</p>
                     </div>
@@ -19,8 +21,7 @@
                 </td>
                 <td>
                     <input type="text" id="nameInput" name="username" class="inputText" ng-model="account.username"
-                           ng-minlength="4" ng-maxlength="15"
-                           ng-required="true"/>
+                           ng-minlength="4" ng-maxlength="15" ng-required="true"/> <!-- th:field="*{username}" -->
                 </td>
 
             </tr>
@@ -36,7 +37,7 @@
                 </td>
                 <td>
                     <input type="password" id="passInput" name="password" class="inputText" ng-model="account.password"
-                           ng-minlength="8" ng-required="true"/>
+                           ng-minlength="8" ng-required="true"/> <!-- th:field="*{password}" -->
                 </td>
             </tr>
             <tr>
@@ -59,21 +60,21 @@
                 </td>
                 <td>
                     <input type="email" id="emailInput" name="email" class="inputText" ng-model="account.email"
-                           ng-required="true"/>
+                           ng-required="true"/> <!-- th:field="*{email}" -->
                 </td>
             </tr>
             <tr>
                 <td><label id="firstNameLabel" class="inputLabel" for="firstNameInput">First name:</label></td>
                 <td>
                     <input type="text" id="firstNameInput" name="firstName" class="inputText" ng-model="account.firstName"
-                           th:required="false"/>
+                           th:required="false"/> <!-- th:field="*{firstName}" -->
                 </td>
             </tr>
             <tr>
                 <td><label id="lastNameLabel" class="inputLabel" for="lastNameInput">Last name:</label></td>
                 <td>
                     <input type="text" id="lastNameInput" name="lastName" class="inputText" ng-model="account.lastName"
-                           th:required="false"/>
+                           th:required="false"/> <!-- th:field="*{secondName}" -->
                 </td>
             </tr>
             <tr>
@@ -81,8 +82,6 @@
             </tr>
             <tr>
                 <td colspan="2" id="submitButton">
-                    <!-- <input type = "submit" name="submitButton" value="LogIn">
-                    <button type="submit" name="logInButton" formaction="@{/logIn}">LogIn</button> -->
                     <div align="right">
                     <!--    <button type="submit" name="registerButton" value="register" ng-click="validate()">Register -->
                         <button type="submit" id = "submit" name="registerButton" value="register">Register

@@ -22,6 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .and().formLogin()
                 .and()
-                .csrf().disable();
+                .csrf().disable(); //TO DO - enable!!!
     }
 }

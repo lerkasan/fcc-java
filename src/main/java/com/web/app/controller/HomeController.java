@@ -1,11 +1,11 @@
 package com.web.app.controller;
 
-import org.springframework.context.annotation.Description;
+import com.web.app.exception.UnauthorizedException;
+import com.web.app.model.entity.AccountEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
@@ -21,14 +21,17 @@ public class HomeController {
         return "views/home";
     }
 
-    @RequestMapping(path = "/register", method = {RequestMethod.GET})
+    @RequestMapping(path = "/register", method = RequestMethod.GET)
     public String register_GET() {
         return "views/register";
     }
 
-    @RequestMapping(path = "/register", method = {RequestMethod.POST})
-    public Object register_POST() {
-        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(null);
+    @RequestMapping(path = "/register", method = RequestMethod.POST)
+    public String register_POST(@RequestParam(value = "username", required = false) String username) {
+        if ((username != null) && username.equals("12345")) {
+            throw new UnauthorizedException("I am a crazy teapot");
+        }
+        return "views/register";
     }
 
     @RequestMapping(path = "/info", method = RequestMethod.GET)
