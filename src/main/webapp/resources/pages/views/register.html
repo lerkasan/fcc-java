@@ -11,9 +11,10 @@
                                              for="nameInput">Username<sup>*</sup>:</label>&nbsp;
                     <div class="formErrors" ng-messages="registerForm.username.$error"
                          ng-show="registerForm.username.$touched">
-                        <p ng-show="registerForm.username.$error.minlength" class="wrongInput">Username is too short.</p>
-                        <p ng-show="registerForm.username.$error.maxlength" class="wrongInput">Username is too long.</p>
+                        <p ng-show="registerForm.username.$error.minlength" class="wrongInput">Must be at least 4 chars.</p>
+                        <p ng-show="registerForm.username.$error.maxlength" class="wrongInput">Must be less than 16 chars.</p>
                         <p ng-show="registerForm.username.$error.required" class="wrongInput">Username is empty.</p>
+                      <!--  <div ng-show="registerForm.username.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
                     </div>
                     <div class='wrongInput'>
                         {{usernameValidationError}}
@@ -29,9 +30,9 @@
                 <td><label id="passwordLabel1" class="inputLabel" for="passInput">Password<sup>*</sup>:</label>&nbsp;
                     <div class="formErrors" ng-messages="registerForm.password.$error"
                          ng-show="registerForm.password.$touched">
-                        <p ng-show="registerForm.password.$error.minlength" class="wrongInput">Password is too
-                            short.</p>
+                        <p ng-show="registerForm.password.$error.minlength" class="wrongInput">Must be at least 8 chars.</p>
                         <p ng-show="registerForm.password.$error.required" class="wrongInput">Password is empty.</p>
+                       <!-- <div ng-show="registerForm.password.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
                     </div>
                     <div class='wrongInput'>{{passwordValidationError}}</div>
                 </td>
@@ -55,6 +56,7 @@
                          ng-show="registerForm.email.$touched">
                         <p ng-show="registerForm.email.$error.required" class="wrongInput">E-mail is empty.</p>
                         <p ng-show="registerForm.$error.email" class="wrongInput">Wrong e-mail format.</p>
+                      <!--  <div ng-show="registerForm.email.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
                     </div>
                     <div class='wrongInput'>{{emailValidationError}}</div>
                 </td>

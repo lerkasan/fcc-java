@@ -81,7 +81,6 @@ myApp.controller('contactsController', function ($scope, $http) {
 myApp.controller('infoController', function ($scope, $http) {
 });
 
-
 // ************ ADMIN:  Admin Home Page  ******************
 myAdmin.controller('adminHomeController', function ($scope, $http) {
 });
