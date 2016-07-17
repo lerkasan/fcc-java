@@ -2695,7 +2695,7 @@ table {
 #logInTable {
     vertical-align: top;
     display: inline-table;
-    width: 15%;
+    width: 20%;
     right: 20px;
     align: right;
 }
@@ -2758,6 +2758,11 @@ input:focus:invalid {
     color: red;
     font-style: italic;
     padding-left: 50px;
+}
+
+.wrongLoginInput {
+    color: red;
+    font-style: italic;
 }
 
 .formErrors {

@@ -31,14 +31,7 @@ var myApp = angular.module('myApp', ["ngRoute"]).config(function ($routeProvider
             templateUrl: './register.html',
             controller: 'registerController'
         });
-
-
-    $routeProvider.when('/signup',
-        {
-            templateUrl: './signup.html',
-            controller: 'signupController'
-        });
-
+    
     // ************  Default Page  ******************
     $routeProvider.otherwise({redirectTo: '/home'});
 });

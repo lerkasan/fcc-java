@@ -1,19 +1,32 @@
 <div ng-app="myApp">
     <div id="logInDiv" align="right" sec:authorize="isAnonymous()">
-        <form name="logInForm" method="POST" th:action="@{/logIn}">
+        <form name="logInForm" method="POST" th:action="@{#/home}">
             <table id="logInTable">
                 <tr>
-                    <td><label id="nameLabel" for="usernameInput">Username:</label></td>
+                    <td><label id="nameLabel" for="usernameInput">Username:</label>
+                        <div class="formErrors" ng-messages="logInForm.email.$error"
+                             ng-show="logInForm.email.$touched">
+                            <p ng-show="logInForm.email.$error.required" class="wrongLoginInput">Email is empty.</p>
+                            <p ng-show="logInForm.$error.email" class="wrongLoginInput">Enter email</p>
+                            <!--  <div ng-show="registerForm.email.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
+                        </div>
+                        <div class='wrongInput'>{{emailValidationError}}</div>
+                    </td>
                     <td>
-                        <input type="text" id="usernameInput" name="username" ng-model="username"
+                        <input type="email" id="usernameInput" name="email" ng-model="email"
                                th:required="true"/> &nbsp;
-                        <div class='wrongInput'>{{usernameValidationError}}</div>
                     </td>
                 </tr>
                 <tr>
-                    <td><label id="passwordLabel" for="passwordInput">Password:</label></td>
+                    <td><label id="passwordLabel" for="passwordInput">Password:</label>
+                        <div class="formErrors" ng-messages="registerForm.password.$error"
+                             ng-show="logInForm.password.$touched">
+                            <p ng-show="logInForm.password.$error.required" class="wrongLoginInput">Email is empty</p>
+                            <!-- <div ng-show="registerForm.password.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
+                        </div>
+                    </td>
                     <td>
-                        <input type="text" id="passwordInput" name="password" th:required="true"/>
+                        <input type="password" id="passwordInput" name="password" th:required="true"/>
                     </td>
                 </tr>
                 <tr>

@@ -2,6 +2,29 @@
 
 // ************  Home Page  ******************
 myApp.controller('homeController', function ($scope, $http) {
+    $scope.validate = function () {
+
+        $scope.emailValidationError = "";
+        $scope.passwordValidationError = "";
+        $scope.usernameValidationError = "";
+        $scope.validated = true;
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if ($scope.account == null) {
+            $scope.account = {};
+        }
+
+        if (re.test($scope.account.email)) {
+            $scope.emailValidationError = "Wrong email format.";
+            $scope.validated = false;
+        }
+
+        if ($scope.validated) {
+            $scope.submit('http://localhost:8080/#/home', 'Successful login', 'Error occured during login');
+        }
+
+    }
+
 });
 
 // ************  Register Page  ******************
@@ -12,7 +35,8 @@ myApp.controller('registerController', function ($scope, $http) {
         $scope.emailValidationError = "";
         $scope.passwordValidationError = "";
         $scope.usernameValidationError = "";
-        // var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        $scope.validated = true;
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var illegalUsernameChars = /\W/;
 
 
@@ -32,26 +56,36 @@ myApp.controller('registerController', function ($scope, $http) {
          $scope.emailValidationError = "E-mail is empty";
          } */
 
+        if (re.test($scope.account.email)) {
+            $scope.emailValidationError = "Wrong email format.";
+            $scope.validated = false;
+        }
+
         if (illegalUsernameChars.test($scope.account.username)) {
             $scope.usernameValidationError = "Please use only letters, numbers and underscopes in username";
+            $scope.validated = false;
         }
 
         if ($scope.account.password != $scope.account.password2) {
             $scope.passwordValidationError = "Passwords aren't equal";
-        } else {
-            $scope.submit();
+            $scope.validated = false;
         }
+
+        if ($scope.validated) {
+            $scope.submit('http://localhost:8080/#/register', 'Registration was successful', 'Error occured during registration');
+        }
+
 
     }
 
-    $scope.submit = function () {
+    $scope.submit = function (urlPath, successMsg, errorMsg) {
 
         // var token = $("meta[name='_csrf']").attr("content");
         // var header = $("meta[name='_csrf_header']").attr("content");
 
         $http({
             method: 'POST',
-            url: 'http://localhost:8080/#/register',
+            url: urlPath,
             //url: '#/register',
             data: $.param($scope.account),  // pass in data as strings
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}  // set the headers so angular passing info as form data (not request payload)
@@ -59,11 +93,17 @@ myApp.controller('registerController', function ($scope, $http) {
             .then(function (response) {
                 $scope.statusCode = response.status;
                 $scope.data = response.data;
-                alert("OK");
+                if (response.status == 200) {
+                    alert(successMsg);
+                }
             }, function (response) {
                 $scope.statusCode = response.status;
                 $scope.errorEmail = "ERROR!!!"
-                alert("BAD");
+                if ((response.status == 405) || (response.status == 401)) {
+                    alert(errorMsg);
+                }
+
+               // alert(response.status);
             });
     };
 

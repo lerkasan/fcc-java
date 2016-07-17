@@ -26,14 +26,6 @@ public class HomeController {
         return "views/register";
     }
 
-    @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public String register_POST(@RequestParam(value = "username", required = false) String username) {
-        if ((username != null) && username.equals("12345")) {
-            throw new UnauthorizedException("I am a crazy teapot");
-        }
-        return "views/register";
-    }
-
     @RequestMapping(path = "/info", method = RequestMethod.GET)
     public String info_GET() {
         return "views/info";
