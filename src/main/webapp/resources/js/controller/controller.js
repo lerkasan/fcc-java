@@ -20,7 +20,7 @@ myApp.controller('homeController', function ($scope, $http) {
         }
 
         if ($scope.valid) {
-            $scope.submit('http://localhost:8080http://localhost:8080/homehttp://localhost:8080/home/home', 'Successful login', 'Error occured during login');
+            $scope.submit('http://localhost:8080/home', 'Successful login', 'Error occured during login');
         }
 
     }
