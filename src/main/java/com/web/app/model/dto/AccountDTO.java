@@ -1,11 +1,18 @@
 package com.web.app.model.dto;
 
+import com.web.app.validator.NameValidator;
+import com.web.app.validator.UsernameValidator;
+import com.web.app.validator.ValidationService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.dozer.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@NoArgsConstructor
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 @EqualsAndHashCode
 public class AccountDTO {
 
@@ -22,6 +29,12 @@ public class AccountDTO {
     private String firstName;
 
     private String lastName;
+
+    @Autowired
+    ValidationService usernameValidator;
+
+    @Autowired
+    ValidationService nameValidator;
 
     public AccountDTO() {
     }
@@ -80,6 +93,40 @@ public class AccountDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String validate() {
+        boolean valid = true;
+        String errorMsg = "";
+
+        if ((getUsername() != null) && !usernameValidator.validate(getUsername())) {
+            valid = false;
+            errorMsg += " Incorrect username format";
+        }
+        if ((getFirstName() != null) && !nameValidator.validate(getFirstName())) {
+            valid = false;
+            errorMsg += " Incorrect first name format";
+        }
+
+        if ((getLastName() != null) && !nameValidator.validate(getLastName())) {
+            valid = false;
+            errorMsg += " Incorrect last name format";
+        }
+
+        if (!getPassword().equals(getPassword2()) || (getPassword().length() < 8)) {
+            valid = false;
+            errorMsg += " Incorrect password format";
+        }
+        try {
+            System.out.print("Before exception");
+            InternetAddress emailAddress = new InternetAddress(getEmail());
+            emailAddress.validate();
+        } catch (AddressException e) {
+            valid = false;
+            e.printStackTrace();
+            errorMsg += " Incorrect e-mail format";
+        }
+        return errorMsg;
     }
 }
 

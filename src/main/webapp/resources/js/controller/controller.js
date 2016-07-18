@@ -2,7 +2,7 @@
 
 // ************  Home Page  ******************
 myApp.controller('homeController', function ($scope, $http) {
-    $scope.validate = function () {
+    $scope.validateLogin = function () {
 
         $scope.emailValidationError = "";
         $scope.passwordValidationError = "";
@@ -10,17 +10,17 @@ myApp.controller('homeController', function ($scope, $http) {
         $scope.valid = true;
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})).$/;
 
-        if ($scope.account == null) {
-            $scope.account = {};
+        if ($scope.login == null) {
+            $scope.login = {};
         }
 
-        if (re.test($scope.account.email)) {
+        if (!re.test($scope.login.email)) {
             $scope.emailValidationError = "Wrong email format.";
             $scope.valid = false;
         }
 
         if ($scope.valid) {
-            $scope.submit('http://localhost:8080/#/home', 'Successful login', 'Error occured during login');
+            $scope.submit('http://localhost:8080http://localhost:8080/homehttp://localhost:8080/home/home', 'Successful login', 'Error occured during login');
         }
 
     }
@@ -30,7 +30,7 @@ myApp.controller('homeController', function ($scope, $http) {
 // ************  Register Page  ******************
 myApp.controller('registerController', function ($scope, $http) {
 
-    $scope.validate = function () {
+    $scope.validateRegistration = function () {
 
         $scope.emailValidationError = "";
         $scope.passwordValidationError = "";
@@ -56,8 +56,8 @@ myApp.controller('registerController', function ($scope, $http) {
          $scope.emailValidationError = "E-mail is empty";
          } */
 
-        if (re.test($scope.account.email)) {
-            $scope.emailValidationError = "Wrong email format.";
+        if (!re.test($scope.account.email)) {
+            $scope.emailValidationError = "Wrong email format";
             $scope.valid = false;
         }
 
@@ -72,7 +72,7 @@ myApp.controller('registerController', function ($scope, $http) {
         }
 
         if ($scope.valid) {
-            $scope.submit('http://localhost:8080/#/register', 'Registration was successful', 'Error occured during registration');
+            $scope.submit('http://localhost:8080/register', 'Registration was successful', 'Error occured during registration');
         }
 
 
@@ -96,14 +96,13 @@ myApp.controller('registerController', function ($scope, $http) {
                 if (response.status == 200) {
                     alert(successMsg);
                 }
+                alert(response.status);
             }, function (response) {
                 $scope.statusCode = response.status;
                 $scope.errorEmail = "ERROR!!!"
-                if ((response.status == 405) || (response.status == 401)) {
-                    alert(errorMsg);
+                if ((response.status == 405) || (response.status == 500) || (response.status == 401)) {
+                    alert(errorMsg+". HTTP error code "+response.status);
                 }
-
-               // alert(response.status);
             });
     };
 

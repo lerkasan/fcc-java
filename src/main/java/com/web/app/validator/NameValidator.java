@@ -6,21 +6,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class UsernameValidator implements ValidationService {
+public class NameValidator implements ValidationService {
 
     private Pattern pattern;
     private Matcher matcher;
 
-    private static final String USERNAME_PATTERN = "^[A-Za-z_][A-Za-z0-9_]{4,15}$";
+    private static final String USERNAME_PATTERN = "^[A-Za-z ]{2,25}$";
 
-    public UsernameValidator() {
+    public NameValidator() {
         this.pattern = Pattern.compile(USERNAME_PATTERN);
     }
 
-    public boolean validate(final String username) {
+    public boolean validate(final String name) {
 
-        matcher = pattern.matcher(username);
+        matcher = pattern.matcher(name);
         return matcher.matches();
-
     }
 }

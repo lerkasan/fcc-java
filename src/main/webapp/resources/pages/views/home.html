@@ -1,6 +1,6 @@
 <div ng-app="myApp">
     <div id="logInDiv" align="right" sec:authorize="isAnonymous()">
-        <form name="logInForm" method="POST" th:action="@{#/home}" th:object="${account}">
+        <form name="logInForm" method="POST" ng-submit="validateLogin()" th:object="${login}">
             <table id="logInTable">
                 <tr>
                     <td><label id="nameLabel" for="usernameInput">Username:</label>
@@ -13,7 +13,7 @@
                         <div class='wrongInput'>{{emailValidationError}}</div>
                     </td>
                     <td>
-                        <input type="email" id="usernameInput" name="email" ng-model="email" th:field="*{email}"
+                        <input type="email" id="usernameInput" name="email" ng-model="login.email" th:field="*{email}"
                                th:required="true"/> &nbsp;
                     </td>
                 </tr>
@@ -26,7 +26,7 @@
                         </div>
                     </td>
                     <td>
-                        <input type="password" id="passwordInput" name="password" th:field="*{password}" th:required="true"/>
+                        <input type="password" id="passwordInput" name="password" ng-model="login.password" th:field="*{password}" th:required="true"/>
                     </td>
                 </tr>
                 <tr>
@@ -39,7 +39,7 @@
             </table>
         </form>
         Have no account yet?&nbsp;
-        <a href="#/register">SignIn</a>
+        <a href="/register">SignIn</a>
     </div>
 </div>
 <div class="container">

@@ -1,6 +1,6 @@
 'use strict';
 
-var myApp = angular.module('myApp', ["ngRoute"]).config(function ($routeProvider) {
+var myApp = angular.module('myApp', ["ngRoute"]).config(function ($routeProvider, $locationProvider) {
 
     $(".button-collapse").sideNav();
 
@@ -34,9 +34,11 @@ var myApp = angular.module('myApp', ["ngRoute"]).config(function ($routeProvider
     
     // ************  Default Page  ******************
     $routeProvider.otherwise({redirectTo: '/home'});
+
+    $locationProvider.html5Mode(true);
 });
 
-var myAdmin = angular.module('myAdmin', ["ngRoute"]).config(function ($routeProvider) {
+var myAdmin = angular.module('myAdmin', ["ngRoute"]).config(function ($routeProvider, $locationProvider) {
 
     // ************  Home Page  ******************
     $routeProvider.when('/home',
@@ -75,6 +77,8 @@ var myAdmin = angular.module('myAdmin', ["ngRoute"]).config(function ($routeProv
 
     // ************  Default Page  ******************
     $routeProvider.otherwise({redirectTo: '/home'});
+
+    $locationProvider.html5Mode(true);
 });
 
 

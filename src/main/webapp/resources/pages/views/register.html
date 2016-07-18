@@ -3,7 +3,7 @@
      {{scope.errorEmail}}
      {{scope.statusCode}}
      <!-- <form name="registerForm" th:method="POST" th:action="@{#/register}" OR ng-submit="validate()"> -->
-     <form name="registerForm" method="POST" ng-submit="validate()" th:object="${account}">
+     <form name="registerForm" method="POST" ng-submit="validateRegistration()" th:object="${login}">
         <table id="registerTable">
             <caption>Please fill in the form below:</caption>
             <tr>
@@ -75,7 +75,7 @@
             <tr>
                 <td><label id="lastNameLabel" class="inputLabel" for="lastNameInput">Last name:</label></td>
                 <td>
-                    <input type="text" id="lastNameInput" name="lastName" class="inputText" ng-model="account.lastName" th:field="*{secondName}"
+                    <input type="text" id="lastNameInput" name="lastName" class="inputText" ng-model="account.lastName" th:field="*{lastName}"
                            th:required="false"/>
                 </td>
             </tr>
