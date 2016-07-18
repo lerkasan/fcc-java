@@ -1,6 +1,6 @@
 <div ng-app="myApp">
     <div id="logInDiv" align="right" sec:authorize="isAnonymous()">
-        <form name="logInForm" method="POST" th:action="@{#/home}" th:object="${account}">
+        <form name="logInForm" method="POST" th:action="@{/home}" th:object="${account}">
             <table id="logInTable">
                 <tr>
                     <td><label id="nameLabel" for="usernameInput">Username:</label>
@@ -39,7 +39,7 @@
             </table>
         </form>
         Have no account yet?&nbsp;
-        <a href="#/register">SignIn</a>
+        <a href="/register">SignIn</a>
     </div>
 </div>
 <div class="container">

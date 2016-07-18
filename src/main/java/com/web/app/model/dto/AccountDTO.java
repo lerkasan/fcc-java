@@ -1,11 +1,16 @@
 package com.web.app.model.dto;
 
+import com.web.app.validator.NameValidator;
+import com.web.app.validator.UsernameValidator;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@NoArgsConstructor
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 @EqualsAndHashCode
 public class AccountDTO {
 
@@ -22,6 +27,12 @@ public class AccountDTO {
     private String firstName;
 
     private String lastName;
+
+    @Autowired
+    UsernameValidator usernameValidator;
+
+    @Autowired
+    NameValidator nameValidator;
 
     public AccountDTO() {
     }
@@ -80,6 +91,32 @@ public class AccountDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String validate() {
+        boolean valid = true;
+        String errorMsg = "";
+
+        if (!usernameValidator.validate(getUsername())) {
+            valid = false;
+            errorMsg = "Incorrect username format";
+        }
+        if (!nameValidator.validate(getFirstName()) || !nameValidator.validate(getLastName())) {
+            valid = false;
+            errorMsg = "Incorrect name format";
+        }
+
+        if (!getPassword().equals(getPassword2()) || (getPassword().length() < 8)) {
+            valid = false;
+            errorMsg = "Incorrect name format";
+        }
+        try {
+            InternetAddress emailAddress = new InternetAddress(getEmail());
+        } catch (AddressException e) {
+            valid = false;
+            errorMsg = "Incorrect e-mail format";
+        }
+        return errorMsg;
     }
 }
 

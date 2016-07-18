@@ -40,29 +40,12 @@ public class HomeController {
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public String register_POST(@ModelAttribute AccountDTO account, Model model) {
-        boolean valid = true;
-        if (account != null) {
-            if (!account.getPassword().equals(account.getPassword2()) || (account.getPassword().length() < 8)) {
-                valid = false;
-            }
-            try {
-                InternetAddress emailAddress = new InternetAddress(account.getEmail());
-            } catch (AddressException e) {
-                valid = false;
-            }
-            if () {
-
-            }
-        }
+        String errorMsg = account.validate();
+       if (!errorMsg.equals("")) {
+           throw new UnauthorizedException(errorMsg);
+       }
         return "views/register";
     }
-    /*public String register_POST(@RequestParam(value = "username", required = false) String username) {
-    public String register_POST(@RequestParam(value = "username", required = false) String username) {
-        if ((username != null) && username.equals("12345")) {
-            throw new UnauthorizedException("I am a crazy teapot");
-        }
-        return "views/register";
-    } */
 
     @RequestMapping(path = "/info", method = RequestMethod.GET)
     public String info_GET() {

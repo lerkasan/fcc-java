@@ -20,7 +20,7 @@ myApp.controller('homeController', function ($scope, $http) {
         }
 
         if ($scope.valid) {
-            $scope.submit('http://localhost:8080/#/home', 'Successful login', 'Error occured during login');
+            $scope.submit('http://localhost:8080http://localhost:8080/homehttp://localhost:8080/home/home', 'Successful login', 'Error occured during login');
         }
 
     }
@@ -72,7 +72,7 @@ myApp.controller('registerController', function ($scope, $http) {
         }
 
         if ($scope.valid) {
-            $scope.submit('http://localhost:8080/#/register', 'Registration was successful', 'Error occured during registration');
+            $scope.submit('http://localhost:8080/register', 'Registration was successful', 'Error occured during registration');
         }
 
 
