@@ -3,7 +3,7 @@
      {{scope.errorEmail}}
      {{scope.statusCode}}
      <!-- <form name="registerForm" th:method="POST" th:action="@{#/register}" OR ng-submit="validate()"> -->
-     <form name="registerForm" method="POST" ng-submit="validateRegistration()" th:object="${login}">
+     <form name="registerForm" method="POST" ng-submit="validateRegistration()" th:object="${account}">
         <table id="registerTable">
             <caption>Please fill in the form below:</caption>
             <tr>
@@ -32,6 +32,7 @@
                          ng-show="registerForm.password.$touched">
                         <p ng-show="registerForm.password.$error.minlength" class="wrongInput">Must be at least 8 chars.</p>
                         <p ng-show="registerForm.password.$error.required" class="wrongInput">Password is empty.</p>
+                        <p ng-show="account.password!=account.password2" class="wrongInput"> Passwords don't match</p>
                        <!-- <div ng-show="registerForm.password.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
                     </div>
                     <div class='wrongInput'>{{passwordValidationError}}</div>
@@ -58,7 +59,6 @@
                         <p ng-show="registerForm.$error.email" class="wrongInput">Wrong e-mail format.</p>
                       <!--  <div ng-show="registerForm.email.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
                     </div>
-                    <div class='wrongInput'>{{emailValidationError}}</div>
                 </td>
                 <td>
                     <input type="email" id="emailInput" name="email" class="inputText" ng-model="account.email" th:field="*{email}"

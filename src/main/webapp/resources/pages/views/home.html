@@ -15,13 +15,19 @@
                     <td>
                         <input type="email" id="usernameInput" name="email" ng-model="login.email" th:field="*{email}"
                                th:required="true"/> &nbsp;
+                        <div class="formErrors" ng-messages="registerForm.email.$error"
+                             ng-show="registerForm.email.$touched">
+                            <p ng-show="registerForm.email.$error.required" class="wrongInput">Username is empty</p>
+                            <p ng-show="registerForm.$error.email" class="wrongInput">Username must be email</p>
+                            <!--  <div ng-show="registerForm.email.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td><label id="passwordLabel" for="passwordInput">Password:</label>
                         <div class="formErrors" ng-messages="registerForm.password.$error"
                              ng-show="logInForm.password.$touched">
-                            <p ng-show="logInForm.password.$error.required" class="wrongLoginInput">Email is empty</p>
+                            <p ng-show="logInForm.password.$error.required" class="wrongLoginInput">Password is empty</p>
                             <!-- <div ng-show="registerForm.password.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
                         </div>
                     </td>
@@ -39,7 +45,7 @@
             </table>
         </form>
         Have no account yet?&nbsp;
-        <a href="/register">SignIn</a>
+        <a href="#/register">SignIn</a>
     </div>
 </div>
 <div class="container">

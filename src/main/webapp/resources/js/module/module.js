@@ -34,8 +34,9 @@ var myApp = angular.module('myApp', ["ngRoute"]).config(function ($routeProvider
     
     // ************  Default Page  ******************
     $routeProvider.otherwise({redirectTo: '/home'});
+    
 
-    $locationProvider.html5Mode(true);
+  //  $locationProvider.html5Mode(true);
 });
 
 var myAdmin = angular.module('myAdmin', ["ngRoute"]).config(function ($routeProvider, $locationProvider) {
@@ -78,8 +79,9 @@ var myAdmin = angular.module('myAdmin', ["ngRoute"]).config(function ($routeProv
     // ************  Default Page  ******************
     $routeProvider.otherwise({redirectTo: '/home'});
 
-    $locationProvider.html5Mode(true);
+ //   $locationProvider.html5Mode(true);
 });
+
 
 
 

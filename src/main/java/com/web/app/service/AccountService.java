@@ -14,4 +14,10 @@ public interface AccountService {
     AccountEntity findById(Long id);
 
     List<AccountEntity> findAll();
+
+    AccountEntity findByUsername(String username);
+
+    AccountEntity findByEmail(String email);
+
+
 }

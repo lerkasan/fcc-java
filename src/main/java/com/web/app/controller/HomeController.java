@@ -29,30 +29,33 @@ public class HomeController {
     @RequestMapping(path = "/home", method = RequestMethod.GET)
     public String home_GET(Model model) {
         model.addAttribute("login", new AccountDTO());
-        model.addAttribute("account", new AccountDTO());
+        // model.addAttribute("account", new AccountDTO());
         return "views/home";
     }
 
     @RequestMapping(path = "/home", method = RequestMethod.POST)
     public String home_POST(@ModelAttribute AccountDTO login, Model model) {
+        model.addAttribute("login", new AccountDTO());
         return "views/home";
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
     public String register_GET(Model model) {
-        model.addAttribute("login", new AccountDTO());
+        //   model.addAttribute("login", new AccountDTO());
         model.addAttribute("account", new AccountDTO());
         return "views/register";
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public String register_POST(@ModelAttribute AccountDTO account, Model model) {
+    public Object register_POST(@ModelAttribute AccountDTO account, Model model) {
         beanFactory.autowireBean(account);
         String errorMsg = account.validate();
         System.out.print(account.getEmail());
-       if (!errorMsg.equals("")) {
-           throw new UnauthorizedException(errorMsg);
-       }
+        if (!errorMsg.equals("")) {
+            //throw new UnauthorizedException(errorMsg);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMsg);
+        }
+        model.addAttribute("account", new AccountDTO());
         return "views/register";
     }
 

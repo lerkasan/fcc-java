@@ -38,4 +38,10 @@ public class AccountServiceImpl implements AccountService {
     public List<AccountEntity> findAll() {
         return repository.findAll();
     }
+
+    @Override
+    public AccountEntity findByUsername(String username) { return repository.findByUsername(username); }
+
+    @Override
+    public AccountEntity findByEmail(String email) { return repository.findByEmail(email); }
 }
