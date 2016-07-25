@@ -5,42 +5,65 @@ import com.web.app.service.AccountService;
 import com.web.app.validator.Unique;
 import com.web.app.validator.ValidationService;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.ScriptAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-
+@NoArgsConstructor
 @EqualsAndHashCode
 //@FieldMatch(first = "password", second = "password2", message = "The password fields must match")
 @ScriptAssert(lang = "javascript", script = "_this.password == _this.password2")
 public class AccountDTO {
 
+    @Getter
+    @Setter
     private Long id;
 
-    @NotEmpty
-    @Size(min=4, max=15)
+    @Getter
+    @Setter
+    @NotEmpty(message="Username can't be empty")
+    @Unique
+    @Size(min=4, max=15, message = "Username length must be from 4 to 15 chars")
+  //  @Pattern(regexp = "[A-Za-z][A-Za-z0-9_]{4,15}$", message = "Please use only letters, numbers and underscopes in username")
     private String username;
 
-    @NotEmpty
-    @Size(min=8)
+    @Getter
+    @Setter
+    @NotEmpty(message="Password can't be empty")
+    @Size(min=8, message = "Password length must be 8 or more chars")
     private String password;
 
-    @NotEmpty
-    @Size(min=8)
+    @Getter
+    @Setter
+    @NotEmpty(message="Password confirmation can't be empty")
+    @Size(min=8, message = "Password confirmation length must be 8 or more chars")
     private String password2;
 
-    @NotEmpty
-    @Email
+    @Getter
+    @Setter
+    @NotEmpty(message="E-mail can't be empty")
+    @Unique
+    @Email(message="Wrong e-mail format")
     private String email;
 
+    //@Pattern(regexp = "[A-Za-z ]", message = "Please use only letters and space in first name")
+    @Getter
+    @Setter
     private String firstName;
 
+ //  @Pattern(regexp = "[A-Za-z ]", message = "Please use only letters and space in last name")
+    @Getter
+    @Setter
     private String lastName;
 
     @Autowired
@@ -50,83 +73,26 @@ public class AccountDTO {
     ValidationService nameValidator;
 
     @Autowired
-    AccountService accountService;
-
-    public AccountDTO() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    private AccountService accountService;
 
     public String validateUnique() {
         Class<?> cls = this.getClass();
         Class<?> serviceCls = accountService.getClass();
-        Field[] fields = cls.getFields();
+        Field[] fields = cls.getDeclaredFields();
         AccountEntity foundAccount = null;
         String error = "";
 
         for (Field field : fields) {
             if (field.isAnnotationPresent(Unique.class)) {
                 try {
-                    Method findByMethod = serviceCls.getMethod("findBy" + field.getName());
-                    Method getter = cls.getMethod("get" + field.getName());
+                    String fieldNameLowcase = field.getName();
+                    String fieldName = fieldNameLowcase.substring(0, 1).toUpperCase() + fieldNameLowcase.substring(1);
+                    Method findByMethod = serviceCls.getMethod("findBy" + fieldName, String.class);
+                    Method getter = cls.getMethod("get" + fieldName);
                     Object fieldValue = getter.invoke(this);
-                    foundAccount = (AccountEntity) findByMethod.invoke(this, fieldValue);
+                    foundAccount = (AccountEntity) findByMethod.invoke(accountService, fieldValue);
                     if (foundAccount != null) {
-                        error += field.getName() + " is already registered. Try another "+field.getName();
+                        error += " " + field.getName() + " is already registered. Try another " + field.getName() + ".";
                     }
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
@@ -157,21 +123,7 @@ public class AccountDTO {
             valid = false;
             errorMsg += " Incorrect last name format.";
         }
-
         errorMsg += validateUnique();
-        /* if (!getPassword().equals(getPassword2()) || (getPassword().length() < 8)) {
-            valid = false;
-            errorMsg += " Incorrect password format";
-        } */
-       /* try {
-            System.out.print("Before exception");
-            InternetAddress emailAddress = new InternetAddress(getEmail());
-            emailAddress.validate();
-        } catch (AddressException e) {
-            valid = false;
-            e.printStackTrace();
-            errorMsg += " Incorrect e-mail format";
-        } */
         return errorMsg;
     }
 }

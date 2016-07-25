@@ -20,7 +20,6 @@ myApp.controller('homeController', function ($scope, $http) {
             }
         }, function (response) {
             $scope.statusCode = response.status;
-            $scope.errorEmail = "ERROR!!!"
             if ((response.status == 405) || (response.status == 500) || (response.status == 401)) {
                 alert('Error occured during login. '+'HTTP error code '+response.status);
             }
@@ -95,7 +94,7 @@ myApp.controller('registerController', function ($scope, $http) {
                 if (response.status == 200) {
                     alert(successMsg);
                 }
-                alert(response.status);
+              //  alert(response.status);
             }, function (response) {
                 $scope.statusCode = response.status;
                 $scope.errorEmail = "ERROR!!!"

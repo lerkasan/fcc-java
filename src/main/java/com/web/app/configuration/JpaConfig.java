@@ -86,6 +86,7 @@ public class JpaConfig {
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setGenerateDdl(generateDdl);
+        //jpaVendorAdapter.setGenerateDdl(false);
         jpaVendorAdapter.setDatabase(Database.valueOf(database));
         return jpaVendorAdapter;
     }
@@ -93,7 +94,7 @@ public class JpaConfig {
     private Properties jpaProperties() {
         // Config Hibernate
         Properties jpaProperties = new Properties();
-        jpaProperties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
+       // jpaProperties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
         jpaProperties.setProperty("hibernate.dialect", dialect);
         jpaProperties.setProperty("hibernate.show_sql", String.valueOf(showSql));
         jpaProperties.setProperty("hibernate.format_sql", String.valueOf(formatSql));

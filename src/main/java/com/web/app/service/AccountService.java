@@ -19,5 +19,7 @@ public interface AccountService {
 
     AccountEntity findByEmail(String email);
 
+    AccountEntity findByEmailAndPassword(String email, String password);
+
 
 }

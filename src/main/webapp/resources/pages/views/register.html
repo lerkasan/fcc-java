@@ -14,6 +14,7 @@
                         <p ng-show="registerForm.username.$error.minlength" class="wrongInput">Must be at least 4 chars.</p>
                         <p ng-show="registerForm.username.$error.maxlength" class="wrongInput">Must be less than 16 chars.</p>
                         <p ng-show="registerForm.username.$error.required" class="wrongInput">Username is empty.</p>
+                        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</p>
                       <!--  <div ng-show="registerForm.username.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
                     </div>
                     <div class='wrongInput'>
@@ -33,6 +34,7 @@
                         <p ng-show="registerForm.password.$error.minlength" class="wrongInput">Must be at least 8 chars.</p>
                         <p ng-show="registerForm.password.$error.required" class="wrongInput">Password is empty.</p>
                         <p ng-show="account.password!=account.password2" class="wrongInput"> Passwords don't match</p>
+                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</p>
                        <!-- <div ng-show="registerForm.password.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
                     </div>
                     <div class='wrongInput'>{{passwordValidationError}}</div>
@@ -48,6 +50,7 @@
                 <td>
                     <input type="password" id="passwordInput2" name="password2" class="inputText" ng-model="account.password2"
                            th:required="true" th:field="*{password2}"/>
+                    <p th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">Password error</p>
 
                 </td>
             </tr>
@@ -57,6 +60,7 @@
                          ng-show="registerForm.email.$touched">
                         <p ng-show="registerForm.email.$error.required" class="wrongInput">E-mail is empty.</p>
                         <p ng-show="registerForm.$error.email" class="wrongInput">Wrong e-mail format.</p>
+                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">E-mail error</p>
                       <!--  <div ng-show="registerForm.email.$error" class="wrongInput" ng-messages-include="messages.html"></div> -->
                     </div>
                 </td>
@@ -70,6 +74,7 @@
                 <td>
                     <input type="text" id="firstNameInput" name="firstName" class="inputText" ng-model="account.firstName" th:field="*{firstName}"
                            th:required="false"/>
+                    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
                 </td>
             </tr>
             <tr>
@@ -77,6 +82,7 @@
                 <td>
                     <input type="text" id="lastNameInput" name="lastName" class="inputText" ng-model="account.lastName" th:field="*{lastName}"
                            th:required="false"/>
+                    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</p>
                 </td>
             </tr>
             <tr>

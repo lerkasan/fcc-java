@@ -11,7 +11,7 @@ public class UsernameValidator implements ValidationService {
     private Pattern pattern;
     private Matcher matcher;
 
-    private static final String USERNAME_PATTERN = "^[A-Za-z_][A-Za-z0-9_]{4,15}$";
+    private static final String USERNAME_PATTERN = "^[A-Za-z_][A-Za-z0-9_]{3,15}$";
 
     public UsernameValidator() {
         this.pattern = Pattern.compile(USERNAME_PATTERN);

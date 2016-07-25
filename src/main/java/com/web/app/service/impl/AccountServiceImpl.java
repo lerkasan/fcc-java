@@ -44,4 +44,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountEntity findByEmail(String email) { return repository.findByEmail(email); }
+
+    public AccountEntity findByEmailAndPassword(String email, String password) { return repository.findByEmailAndPassword(email, password);}
 }
