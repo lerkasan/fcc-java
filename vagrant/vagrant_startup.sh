@@ -14,6 +14,9 @@ git \
 maven \
 postgresql
 
+echo 'M2_HOME="/usr/share/maven"' >> /etc/environment
+source /etc/environment
+
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get -qq -y --force-yes install \
 nodejs \
