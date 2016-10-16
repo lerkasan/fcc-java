@@ -37,7 +37,7 @@ sudo echo '<?xml version="1.0" encoding="UTF-8"?>
 </settings>' > /usr/share/maven/conf/settings.xml
 
 #sudo -u postgres psql < ~/brdo/create_db.sql
-sudo -u postgres psql -a -f ~/brdo/create_db.sql
+sudo -u postgres psql -a -f /home/vagrant/brdo/vagrant/create_db.sql
 
 git clone https://github.com/lerkasan/fcc-java.git
 cd fcc-java
