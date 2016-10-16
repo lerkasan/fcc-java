@@ -39,8 +39,10 @@ sudo echo '<?xml version="1.0" encoding="UTF-8"?>
 #sudo -u postgres psql < ~/brdo/create_db.sql
 sudo -u postgres psql -a -f /home/vagrant/brdo/vagrant/create_db.sql
 
+cd ..
 git clone https://github.com/lerkasan/fcc-java.git
 cd fcc-java
+
 mvn clean install
 echo "*********** INSTALLATION FINISHED ***********."
 mvn jetty:run
